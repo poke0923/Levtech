@@ -11,7 +11,10 @@ class PostRequest extends FormRequest
      *
      * @return bool
      */
-    
+    public function authorize()
+    {
+        return true;
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -21,8 +24,12 @@ class PostRequest extends FormRequest
     public function rules()
     {
         return [
-            'post.title' => 'required|string|max:40',
-            'post.body'=> 'required|string|max:4000'
+            //ここに記載するルールをバリデーションという
+            /*リクエストで送られてくる内容について、
+            文字の型や内容、文字数など様々なルールを設定できる
+            */
+            'post.title' => 'required|max:40',
+            'post.body' => 'required|max:4000'
         ];
     }
 }
