@@ -8,14 +8,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use SoftDeletes;
     use HasFactory;
-    public function getPaginateByLimit(int $limit_count=5){
-        return $this ->orderBy('updated_at','DESC' ) ->paginate($limit_count);
-    }
+    use SoftDeletes;
     
-    protected $fillable=[
+    public function getPaginate($limit_count=5){
+        return $this -> orderby('updated_at', 'DESC')->paginate($limit_count);
+        
+    }
+    //↑これはSQL的なコマンドも含んでいて、Controllerに書くこともできる
+    //ただし、それはControllerの内容が長くなりすぎるので好ましくない。
+    
+    protected $fillable = [
         'title',
-        'body',
-        ];
+        'body'
+        ] ;
 }
