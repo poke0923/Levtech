@@ -29,6 +29,14 @@
     <h2 class="body">body</h2>
     <textarea name="post[body]" placeholder="本文" >{{old('post.body')}}</textarea>
     <p style="color:red; font-weight:bold;" >{{$errors -> first('post.body')}}</p>
+    
+     <h2 class="category">Category</h2>
+    <select name="post[category_id]">
+        @foreach($categories as $category)
+            <option value="{{$category->id}}">{{$category->name}}</option>
+        @endforeach
+    </select>
+    
     <p><input type="submit" value="保存"></p>
     
     </form>

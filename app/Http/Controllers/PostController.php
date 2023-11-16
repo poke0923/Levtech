@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Category;
 use App\Http\Requests\PostRequest;
 
 
@@ -47,8 +48,8 @@ class PostController extends Controller
     とりあえず得られる結果は同じになっている。。。
     */
     
-    public function create(){
-        return view('posts.create');
+    public function create(Category $category){
+        return view('posts.create')->with(['categories'=>$category->get()]);
     }
     
     public function store(PostRequest $postrequest, Post $post){
