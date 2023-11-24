@@ -6,10 +6,23 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
 use App\Http\Requests\PostRequest;
+use GuzzleHttp\Client;
 
 
 class PostController extends Controller
 {
+    public function teratail(){
+        
+        $client = new Client();
+        $response = $client->request('GET', 'https://teratail.com/api/v1/questions',['Bearer' => config('services.teratail.token')]);
+        $questions = json_decode($response->getBody(), true);
+        
+
+      
+        return view('posts.teratail')->with([ 'questions' => $questions['questions'],]);
+    }
+    
+    
     //(Post $post)のようにfunctionで作成するmethodの引数にクラスのインスタンスを
     //変数として渡すことをメソッドインジェクションという
     //ネストされている要素を指定するときは「.（ドット）」で繋ぐことで指定できる
